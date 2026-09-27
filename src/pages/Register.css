@@ -1,0 +1,72 @@
+/* ==========================================================================
+   InternTrust — Register page
+   Scoped under .register-page / .register-form-container / .register-form.
+   Deliberately NOT named .auth-page / .auth-form — those class names are
+   owned by Login.css (position: fixed; height: 100vh; overflow: hidden;),
+   and reusing them here was clipping the actual input fields off-screen.
+   ========================================================================== */
+
+.register-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;   /* page can scroll instead of clipping content */
+  overflow-x: hidden;
+  background: #09090b;
+  color: #f5f3ee;
+}
+
+.auth-brand {
+  flex: 1 1 420px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 3rem 2.5rem;
+  background: linear-gradient(160deg, #16336e 0%, #0b1c40 55%, #050b1c 100%);
+}
+
+.auth-form-container {
+  flex: 1 1 420px;
+  min-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.register-switch {
+  font-size: 0.85rem;
+  color: rgba(245, 243, 238, 0.62);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.register-switch a {
+  color: #f5f3ee;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 0.35rem;
+}
+.register-switch a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .auth-brand {
+    display: none;
+  }
+  .mobile-auth-logo {
+    display: block;
+  }
+}

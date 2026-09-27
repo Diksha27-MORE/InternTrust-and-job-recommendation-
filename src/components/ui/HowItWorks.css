@@ -1,0 +1,433 @@
+/* =========================================
+   HOW IT WORKS
+========================================= */
+
+.how-section {
+  width: 100%;
+  padding: 55px 38px 30px;
+  background: #edeae2;
+  overflow: hidden;
+}
+
+.how-container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   HEADING
+========================================= */
+
+.how-heading-wrap {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+/* =========================================
+   SCROLL FILL TEXT
+   Grey -> Black
+========================================= */
+
+.how-eyebrow,
+.how-heading {
+  display: block;
+  position: relative;
+
+  color: transparent;
+
+  background-image: linear-gradient(
+    90deg,
+    #000000 0%,
+    #000000 100%
+  );
+
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* =========================================
+   HOW IT WORKS
+========================================= */
+
+.how-eyebrow {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  margin: 0 0 14px;
+  line-height: 1;
+}
+/* Grey text underneath */
+
+.how-eyebrow::after {
+  content: "HOW IT WORKS";
+
+  position: absolute;
+  inset: 0;
+
+  color: #b7b7b7;
+
+  z-index: -1;
+}
+
+/* =========================================
+   MAIN HEADLINE
+========================================= */
+
+.how-heading {
+  margin: 0;
+
+  font-size: clamp(48px, 6vw, 92px);
+
+  line-height: 0.98;
+
+  font-weight: 700;
+
+  letter-spacing: -0.055em;
+}
+
+/* Grey text underneath */
+
+.how-heading::after {
+  content: "Stay one step ahead of scams.";
+
+  position: absolute;
+  inset: 0;
+
+  color: #b7b7b7;
+
+  z-index: -1;
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+.how-cards {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+
+  width: 100%;
+}
+
+/* =========================================
+   SINGLE CARD
+========================================= */
+
+.how-card {
+  position: relative;
+
+  height: 600px;
+
+  overflow: hidden;
+
+  border-radius: 26px;
+
+  cursor: pointer;
+
+  background: #171717;
+
+  transform: translateZ(0);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease;
+}
+
+.how-card:hover {
+  transform: translateY(-8px);
+}
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.how-card-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.how-card.is-active .how-card-image {
+  transform: scale(1.06);
+}
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.how-card-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.28) 0%,
+    rgba(0, 0, 0, 0.28) 100%
+  );
+
+  transition: background 0.5s ease;
+}
+
+.how-card.is-active .how-card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+}
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.how-card-content {
+  position: absolute;
+
+  inset: 0;
+
+  padding: 34px;
+
+  color: white;
+
+  text-align: center;
+}
+
+/* =========================================
+   PILL
+========================================= */
+
+.how-card-pill {
+  position: absolute;
+
+  left: 50%;
+  top: 34px;
+
+  transform: translate(-50%, -12px);
+
+  padding: 7px 16px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.how-card.is-active .how-card-pill {
+  opacity: 1;
+
+  transform: translate(-50%, 0);
+}
+
+/* =========================================
+   CARD TITLE
+   CENTERED INITIALLY
+========================================= */
+
+.how-card h3 {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 50%;
+
+  margin: 0;
+
+  padding: 0 24px;
+
+  font-size: clamp(28px, 2.5vw, 40px);
+
+  line-height: 1.1;
+
+  font-weight: 700;
+
+  letter-spacing: -0.03em;
+
+  transform: translateY(-50%);
+
+  transition:
+    top 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================
+   ACTIVE TITLE
+========================================= */
+
+.how-card.is-active h3 {
+  top: 82px;
+
+  transform: translateY(0);
+}
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.how-card p {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 148px;
+
+  margin: 0 auto;
+
+  max-width: 88%;
+
+ font-size: 30px;
+  line-height: 1.55;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  opacity: 0;
+
+  transform: translateY(14px);
+
+  transition:
+    opacity 0.45s ease 0.08s,
+    transform 0.5s ease 0.08s;
+}
+
+.how-card.is-active p {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+/* =========================================
+   ACTIVE CARD
+========================================= */
+
+.how-card.is-active {
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .how-section {
+    padding: 70px 25px 100px;
+  }
+
+  .how-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .how-card {
+    height: 520px;
+  }
+
+  .how-heading {
+    font-size: clamp(48px, 7vw, 75px);
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .how-section {
+    padding: 60px 18px 80px;
+  }
+
+  .how-heading-wrap {
+    margin-bottom: 45px;
+  }
+
+  .how-eyebrow {
+    font-size: 12px;
+
+    margin-bottom: 14px;
+  }
+
+  .how-heading {
+    font-size: clamp(42px, 12vw, 60px);
+
+    letter-spacing: -0.045em;
+  }
+
+  .how-cards {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .how-card {
+    height: 460px;
+
+    border-radius: 20px;
+  }
+
+  /* No hover movement on mobile */
+
+  .how-card:hover {
+    transform: none;
+  }
+
+  .how-card-content {
+    padding: 26px;
+  }
+
+  .how-card h3 {
+    font-size: 30px;
+  }
+
+  .how-card.is-active h3 {
+    top: 68px;
+  }
+
+  .how-card p {
+    top: 126px;
+
+    font-size: 15px;
+  }
+
+  .how-card-pill {
+    top: 26px;
+  }
+}

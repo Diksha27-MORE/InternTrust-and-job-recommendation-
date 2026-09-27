@@ -1,0 +1,255 @@
+/* =========================================
+   INTERNTRUST CINEMATIC HERO
+   Isolated classes — do not reuse old
+   .hero / .hero-content / .risk-card rules.
+========================================= */
+
+.interntrust-home {
+  /* Full-bleed: escapes any max-width/padding a parent
+     container (e.g. a centered <div className="app">) may have,
+     so the hero always spans the true viewport width. */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+
+  height: 100vh;
+  min-height: 100vh;
+
+  overflow: hidden;
+  background: #05070a;
+  cursor: default;
+
+  box-sizing: border-box;
+}
+
+/* Background video: absolutely fills the hero, full-bleed,
+   object-fit: cover so it never letterboxes. */
+.interntrust-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.08) translate3d(0, 0, 0);
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform 0.05s linear;
+
+  filter: saturate(0.92) brightness(0.85);
+
+  z-index: 0;
+}
+
+/* Darkening layer for text legibility, cinematic tone */
+.interntrust-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 6, 10, 0.55) 0%,
+      rgba(4, 6, 10, 0.35) 40%,
+      rgba(4, 6, 10, 0.65) 100%
+    );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Soft cursor-follow glow that subtly lights the video */
+.interntrust-cursor-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 620px;
+  height: 620px;
+  margin-left: -310px;
+  margin-top: -310px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  will-change: transform;
+}
+
+/* Centered content, positioned directly on top of the video */
+.interntrust-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 0 24px;
+  pointer-events: none;
+}
+
+.interntrust-content > * {
+  pointer-events: auto;
+}
+
+.interntrust-title {
+  margin: 0;
+  font-size: clamp(44px, 7vw, 96px);
+  font-weight: 600;
+  letter-spacing: -2px;
+  color: #ffffff;
+  line-height: 1;
+
+  opacity: 0;
+  transform: translateY(14px);
+  animation: interntrust-fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+.interntrust-tagline {
+  margin: 22px 0 0;
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: interntrust-fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.05s;
+}
+
+.interntrust-explore {
+  margin-top: 64px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+
+  opacity: 0;
+  animation: interntrust-fade-in 1.6s ease forwards;
+  animation-delay: 1.7s;
+  transition: color 0.3s ease;
+}
+
+.interntrust-explore:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.interntrust-create-account {
+  margin-top: 20px;
+  padding: 12px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.interntrust-create-account:hover {
+  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.interntrust-explore-arrow {
+  font-size: 14px;
+  display: inline-block;
+  animation: interntrust-bob 2.4s ease-in-out infinite;
+  animation-delay: 2.4s;
+}
+
+/* =========================================
+   KEYFRAMES
+========================================= */
+
+@keyframes interntrust-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes interntrust-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes interntrust-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .interntrust-cursor-glow {
+    width: 420px;
+    height: 420px;
+    margin-left: -210px;
+    margin-top: -210px;
+  }
+
+  .interntrust-explore {
+    margin-top: 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  .interntrust-home {
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  .interntrust-title {
+    letter-spacing: -1px;
+  }
+
+  .interntrust-tagline {
+    letter-spacing: 2px;
+  }
+
+  .interntrust-cursor-glow {
+    width: 320px;
+    height: 320px;
+    margin-left: -160px;
+    margin-top: -160px;
+  }
+}
+/* =========================================================
+   NAVIGATION SECTION ANCHORS
+   ========================================================= */
+
+.interntrust-section-anchor {
+  scroll-margin-top: 20px;
+}

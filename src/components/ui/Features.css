@@ -1,0 +1,163 @@
+*, *::before, *::after { box-sizing: border-box; }
+/* ── Scroll shell ───────────────────────────────────────────────────────── */
+.cts-section {
+  position: relative;
+  background: #EDEAE2;
+}
+.cts-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #EDEAE2;
+  isolation: isolate;
+}
+.cts-headline {
+  margin: 0;
+  margin-top: 64px;
+  text-align: center;
+  font-family: var(--heading);
+  font-size: clamp(58px, 7vw, 102px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  color: #111;
+}
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.cts-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  will-change: transform, width, height, opacity;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 44px;
+  gap: 8px;
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.10),
+    0 12px 40px rgba(0, 0, 0, 0.18),
+    0 32px 80px rgba(0, 0, 0, 0.20);
+}
+.cts-card--1 { background-color: #1C1915; }
+.cts-card--2 { background-color: #161A22; }
+.cts-card--3 { background-color: #161C16; }
+.cts-card--4 { background-color: #1C1915; }
+.cts-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  pointer-events: none;
+}
+.cts-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: linear-gradient(
+    148deg,
+    rgba(255, 255, 255, 0.045) 0%,
+    transparent 38%,
+    rgba(0, 0, 0, 0.28) 100%
+  );
+  pointer-events: none;
+}
+/* ── Top-left stack: number + label ─────────────────────────────────────── */
+.cts-card__topleft {
+  position: absolute;
+  top: 26px;
+  left: 40px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.cts-card__num {
+  font-family: "Avenir Light";
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.55);
+}
+.cts-card__label-line {
+  display: block;
+  font-family: "Avenir Black" !important;
+  font-weight: 900 !important;
+  font-size: 4.5em;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+.cts-card__title {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 28px;
+  font-family: "Avenir Light";
+  font-size: clamp(19px, 1.3vw, 2px);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  width: auto;
+  max-width: none;
+  white-space: pre-line;
+  opacity: 0;
+}
+.cts-card__title-line {
+  display: block;
+  min-height: 1.45em;
+}
+/* ── Alternating description panels (left / right of hero) ──────────────── */
+.cts-desc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+.cts-desc--left .cts-desc__heading,
+.cts-desc--left .cts-desc__body,
+.cts-desc--right .cts-desc__heading,
+.cts-desc--right .cts-desc__body { text-align: left; }
+.cts-desc__sections {
+  position: relative;
+  display: grid;    
+}
+.cts-desc__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  will-change: opacity, transform;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  justify-self: stretch;
+}
+.cts-desc__heading {
+  font-family: "Avenir Black";
+  font-size: clamp(22px, 1.5vw, 28px);
+  font-weight: 900;
+  line-height: 1.3;
+  color: #000;
+}
+.cts-desc__body {
+  font-family: "Avenir Light";
+  font-size: clamp(18px, 1.2vw, 22px);
+  font-weight: 300;
+  line-height: 1.5;
+  color: #000;
+}

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternTrust - Fraud Detection for Job Seekers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#" onclick="showPage('home')">
+                <i class="fas fa-shield-alt"></i> InternTrust
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" id="navMenu">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('home')">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('analyze')">Check Now</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('history')">History</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('profile')">Profile</a>
+                    </li>
+
+                    <!-- ✅ NEW DASHBOARD BUTTON -->
+                    <li class="nav-item">
+                        <a class="nav-link text-info fw-semibold" href="/dashboard.html">
+                            <i class="fas fa-chart-line"></i> Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="btn btn-outline-danger btn-sm ms-2" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- EVERYTHING BELOW REMAINS SAME -->
+    <!-- Main Container -->
+    <div class="container-fluid page-container">
+
+        <!-- LOGIN PAGE -->
+<div id="login-page" class="page-content">
+
+    <div class="cyber-bg"></div>
+
+    <div class="login-container-modern">
+
+        <!-- LEFT PANEL -->
+        <div class="login-left-panel">
+
+            <div class="brand-box">
+
+                <div class="shield-icon">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+
+                <h1 class="brand-title">
+                    InternTrust
+                </h1>
+
+                <p class="brand-subtitle">
+                    Cyber-safe internship verification for students
+                </p>
+
+                <div class="cyber-lines"></div>
+
+                <div class="feature-list">
+
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>Instant Scam Detection</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure Internship Verification</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-brain"></i>
+                        <span>AI Risk Analysis</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="login-right-panel">
+
+            <div class="login-card-modern">
+
+                <div class="login-top text-center">
+
+                    <h2 class="login-heading">
+                        Detect Fake Jobs Before They Detect You
+                    </h2>
+
+                    <p class="login-text">
+                        Detect fake internships, analyze risk & explore trusted opportunities.
+                    </p>
+
+                </div>
+
+                <form id="loginForm">
+
+                    <div class="modern-input-group">
+
+                        <label>Email Address</label>
+
+                        <div class="input-icon-box">
+
+                            <i class="fas fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                class="form-control modern-input"
+                                id="loginEmail"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="modern-input-group">
+
+                        <label>Password</label>
+
+                        <div class="input-icon-box">
+
+                            <i class="fas fa-lock"></i>
+
+                            <input
+                                type="password"
+                                class="form-control modern-input"
+                                id="loginPassword"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn login-btn-modern">
+
+                        <i class="fas fa-right-to-bracket"></i>
+                        Login Securely
+
+                    </button>
+
+                </form>
+
+                <div class="divider-modern">
+                    <span>OR</span>
+                </div>
+
+                <button
+                    class="btn register-btn-modern"
+                    onclick="switchToRegister()"
+                >
+
+                    <i class="fas fa-user-plus"></i>
+                    Create New Account
+
+                </button>
+
+                <button
+                    class="btn forgot-btn-modern"
+                    onclick="switchToForgotPassword()"
+                >
+
+                    Forgot Password?
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+        <!-- REGISTER PAGE -->
+        <div id="register-page" class="page-content d-none">
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold">Create Account</h2>
+                        <p class="text-muted">Join InternTrust to protect yourself</p>
+                    </div>
+
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                            <small class="text-muted d-block mt-1">
+                                <i class="fas fa-info-circle"></i> Minimum 8 characters, include uppercase and number
+                            </small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    I agree to the Terms and Conditions
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center">
+                        Already have an account?
+                        <button class="btn btn-link" onclick="switchToLogin()">Login here</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORGOT PASSWORD PAGE -->
+        <div id="forgot-password-page" class="page-content d-none">
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold">Reset Password</h2>
+                        <p class="text-muted">Enter your email to reset your password</p>
+                    </div>
+
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="resetEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="resetEmail" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-envelope"></i> Send Reset Link
+                        </button>
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center">
+                        <button class="btn btn-link" onclick="switchToLogin()">Back to Login</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE CREATION PAGE -->
+        <div id="profile-page" class="page-content d-none">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card shadow-lg">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-user-circle"></i> Create Your Profile
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm">
+                                <div class="mb-3">
+                                    <label for="profileName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="profileName" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profileEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="profileEmail" disabled>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profileUniversity" class="form-label">University/College</label>
+                                    <input type="text" class="form-control" id="profileUniversity" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profileDegree" class="form-label">Degree/Program</label>
+                                    <input type="text" class="form-control" id="profileDegree" placeholder="e.g., B.Tech Computer Science" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profileYear" class="form-label">Current Year</label>
+                                    <select class="form-control" id="profileYear" required>
+                                        <option value="">Select Year</option>
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="4">4th Year</option>
+                                        <option value="5">5th Year</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profilePhone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="profilePhone" placeholder="+91 XXXXX XXXXX" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label"><i class="fas fa-star text-warning"></i> Interests</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="interest1" value="tech">
+                                        <label class="form-check-label" for="interest1">Technology</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="interest2" value="business">
+                                        <label class="form-check-label" for="interest2">Business</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="interest3" value="marketing">
+                                        <label class="form-check-label" for="interest3">Marketing</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="interest4" value="finance">
+                                        <label class="form-check-label" for="interest4">Finance</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-save"></i> Create Profile
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HOME PAGE -->
+      <div id="home-page" class="page-content d-none">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="welcome-card">
+                        <h1 class="fw-bold mb-2">Welcome, <span id="userGreeting">Student</span>!</h1>
+                        <p class="lead text-muted">Protect yourself from fraudulent job postings and internship scams</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+    <div class="col-md-4">
+        <div class="stat-card">
+            <div class="stat-icon bg-primary">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h5>Jobs Checked</h5>
+            <p class="display-6 fw-bold" id="statChecked">0</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card">
+            <div class="stat-icon bg-danger">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h5>Scams Detected</h5>
+            <p class="display-6 fw-bold" id="statScams">0</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card">
+            <div class="stat-icon bg-success">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h5>Safe Jobs</h5>
+            <p class="display-6 fw-bold" id="statSafe">0</p>
+        </div>
+    </div>
+</div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-lightning-bolt"></i> Quick Check
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted mb-4">Analyze a job posting quickly to check if it's legitimate</p>
+                            <form id="quickCheckForm">
+                                <div class="mb-3">
+                                    <label for="quickTitle" class="form-label">Job Title</label>
+                                    <input type="text" class="form-control" id="quickTitle" placeholder="e.g., Junior Developer" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="quickDesc" class="form-label">Job Description</label>
+                                    <textarea class="form-control" id="quickDesc" rows="4" placeholder="Paste the job description here..." required></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="quickEmail" class="form-label">Contact Email</label>
+                                        <input type="email" class="form-control" id="quickEmail" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="quickWebsite" class="form-label">Company Website</label>
+                                        <input type="text" class="form-control" id="quickWebsite" placeholder="https://company.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="quickCompany" class="form-label">Company Name (Optional)</label>
+                                    <input type="text" class="form-control" id="quickCompany" placeholder="e.g., Tech Corp">
+                                </div>
+
+                                <!-- 🔥 NEW -->
+                                <div class="mb-3">
+                                    <label for="quickSkills" class="form-label">Your Skills (Optional)</label>
+                                    <input type="text" class="form-control" id="quickSkills" placeholder="e.g., python, sql, ml">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-search"></i> Analyze Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Result Card -->
+                    <div id="resultSection" class="d-none mt-4">
+                        <div class="card shadow">
+                            <div class="card-header" id="resultHeader">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-chart-pie"></i> Analysis Result
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="resultContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-lightbulb"></i> How It Works
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="how-it-works">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <h6>Copy Job Details</h6>
+                                    <p class="text-muted small">Copy the job title, description, and email from the posting</p>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <h6>Paste in Form</h6>
+                                    <p class="text-muted small">Paste the information into the form on the left</p>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <h6>Get Results</h6>
+                                    <p class="text-muted small">Get instant analysis with risk score and details</p>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <h6>Stay Safe</h6>
+                                    <p class="text-muted small">Make informed decisions about job opportunities</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYZE PAGE -->
+        <div id="analyze-page" class="page-content d-none">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="card shadow-lg">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">
+                                <i class="fas fa-magnifying-glass"></i> Analyze Job Posting
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="analyzeForm" onsubmit="handleAnalyzeSubmit(event)">
+                                <div class="mb-3">
+                                    <label for="analyzeTitle" class="form-label">Job Title *</label>
+                                    <input type="text" class="form-control" id="analyzeTitle" placeholder="Enter job title" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="analyzeDesc" class="form-label">Job Description *</label>
+                                    <textarea class="form-control" id="analyzeDesc" rows="6" placeholder="Paste full job description..." required></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="analyzeEmail" class="form-label">Contact Email *</label>
+                                        <input type="email" class="form-control" id="analyzeEmail" placeholder="hr@company.com" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="analyzeWebsite" class="form-label">Website *</label>
+                                        <input type="text" class="form-control" id="analyzeWebsite" placeholder="https://company.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="analyzeCompany" class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" id="analyzeCompany" placeholder="Company name (optional)">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-play-circle"></i> Analyze
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Large Result Section -->
+                    <div id="analyzeResultSection" class="d-none mt-4">
+                        <div class="card shadow-lg">
+                            <div class="card-header" id="analyzeResultHeader">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-chart-pie"></i> Detailed Analysis
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="analyzeResultContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HISTORY PAGE -->
+        <div id="history-page" class="page-content d-none">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-history"></i> Check History
+                            </h5>
+                            <button class="btn btn-sm btn-light" onclick="exportHistory()">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="historyContent">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> No analysis history yet. Start checking job postings!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p class="mb-0">
+            <i class="fas fa-heart text-danger"></i> InternTrust © 2026 | Protect Your Future
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i>
+</button>
+</body>
+</html>

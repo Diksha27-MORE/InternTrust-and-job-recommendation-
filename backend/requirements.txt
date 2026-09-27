@@ -1,0 +1,14 @@
+Flask>=3.1,<4
+networkx>=3.6,<4
+numpy>=2.3,<3
+pandas>=3.0,<4
+requests>=2.34,<3
+scikit-learn>=1.9,<2
+tldextract>=5.3,<6
+# Optional: sentence-transformers and torch enable the full embedding model.
+
+python-dotenv>=1.0,<2
+gunicorn>=23,<24
+
+python-dotenv>=1.0,<2
+gunicorn>=23,<24

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>InternTrust Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+
+body {
+    background: #0f172a;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* BACKGROUND EFFECTS */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:rgba(59,130,246,0.15);
+    filter:blur(120px);
+    top:-100px;
+    right:-100px;
+    z-index:-1;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:rgba(34,197,94,0.12);
+    filter:blur(120px);
+    bottom:-100px;
+    left:-100px;
+    z-index:-1;
+}
+
+/* NAVBAR */
+
+.navbar {
+    background: rgba(2,6,23,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+/* CARD */
+
+.card {
+    border-radius: 20px;
+    background: rgba(30,41,59,0.75);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: 0.3s;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+h4 {
+    color: #f8fafc;
+    font-weight: 600;
+}
+
+.card h4 i {
+    color: #38bdf8;
+}
+
+/* INPUTS */
+
+input, select {
+
+    border-radius: 12px !important;
+    background:#0f172a !important;
+    color:white !important;
+    border:1px solid #334155 !important;
+    padding:12px !important;
+
+}
+
+input::placeholder{
+    color:#94a3b8 !important;
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight:600;
+}
+
+/* JOB CARD */
+
+.job-card {
+
+    background: linear-gradient(135deg, #1f2937, #111827);
+    border-radius: 16px;
+    padding: 18px;
+    margin-top: 14px;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    transition: 0.25s;
+    border:1px solid rgba(255,255,255,0.05);
+
+}
+
+.job-card:hover {
+    transform: translateY(-6px) scale(1.01);
+}
+
+.match-badge {
+
+    background: linear-gradient(90deg,#22c55e,#16a34a);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+
+}
+
+.top-pick {
+    color: #facc15;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.apply-btn {
+
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#2563eb,#1d4ed8);
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    transition:0.2s;
+
+}
+
+.apply-btn:hover {
+    transform:scale(1.05);
+    color:white;
+}
+
+/* SKILL ANALYZER */
+
+.skill-card {
+
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    border-radius: 18px;
+    padding: 20px;
+    margin-top: 15px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+
+}
+
+.skill-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.market-tag {
+
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 12px;
+    background: linear-gradient(90deg,#2563eb,#1d4ed8);
+    color:white;
+    font-weight:600;
+
+}
+
+.progress {
+
+    height: 12px;
+    border-radius: 12px;
+    background: #334155;
+    overflow: hidden;
+
+}
+
+.progress-bar-custom {
+
+    height: 100%;
+    border-radius: 12px;
+    transition:1s;
+
+}
+
+.gap-badge {
+
+    background: linear-gradient(90deg,#ef4444,#dc2626);
+    padding: 7px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 5px;
+    font-size: 12px;
+    color:white;
+    font-weight:600;
+
+}
+
+.learning-card {
+
+    background: #111827;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 12px;
+    color:#e2e8f0;
+    border:1px solid rgba(255,255,255,0.05);
+
+}
+
+.trend-box {
+
+    margin-top:16px;
+    background:#111827;
+    border-radius:14px;
+    padding:14px;
+    border:1px solid rgba(255,255,255,0.05);
+
+}
+
+.trend-item {
+
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+    font-size:14px;
+
+}
+
+.trend-up {
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.trend-hot {
+    color:#facc15;
+    font-weight:bold;
+}
+
+/* ANIMATION */
+
+.fade-in{
+    animation:fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+
+}
+/* FORCE WHITE TEXT */
+
+body,
+p,
+span,
+div,
+small,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+input,
+select,
+option {
+    color: white !important;
+}
+
+/* INPUT TEXT */
+
+input,
+select {
+    color: white !important;
+}
+
+/* PLACEHOLDER */
+
+input::placeholder {
+    color: #cbd5e1 !important;
+}
+
+/* SKILL ANALYZER TEXT */
+
+#skillResults,
+#skillResults * {
+    color: white !important;
+}
+
+/* JOB CARD TEXT */
+
+.job-card,
+.job-card * {
+    color: white !important;
+}
+
+/* LEARNING CARD */
+
+.learning-card,
+.learning-card * {
+    color: #e2e8f0 !important;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark p-3">
+
+    <div class="container-fluid">
+
+        <span class="navbar-brand fw-bold">
+            <i class="fas fa-shield-alt"></i>
+            InternTrust Dashboard
+        </span>
+
+        <a href="/" class="btn btn-outline-light">
+            ← Back
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container mt-4">
+
+<div class="row g-4">
+
+<!-- JOB RECOMMENDATION -->
+
+<div class="col-lg-6">
+
+<div class="card p-4 h-100">
+
+<h4>
+    <i class="fas fa-briefcase"></i>
+    Job Recommendation
+</h4>
+
+<input
+    id="interests"
+    class="form-control mt-3"
+    placeholder="Skills (python, sql)"
+>
+
+<input
+    id="location"
+    class="form-control mt-2"
+    placeholder="Location (Mumbai / Remote)"
+>
+
+<input
+    id="experience"
+    class="form-control mt-2"
+    placeholder="Experience (0-1 yrs)"
+>
+
+<input
+    id="salary"
+    class="form-control mt-2"
+    placeholder="Expected Salary (3 LPA)"
+>
+
+<button
+    class="btn btn-primary mt-3 w-100"
+    onclick="getJobs()"
+>
+    Get Jobs
+</button>
+
+<h6 class="mt-3">
+    ✨ Recommended for You
+</h6>
+
+<div id="jobResults" class="mt-2"></div>
+
+</div>
+</div>
+
+<!-- SKILL ANALYZER -->
+
+<div class="col-lg-6">
+
+<div class="card p-4 h-100">
+
+<div class="d-flex justify-content-between align-items-center">
+
+<h4>
+    <i class="fas fa-brain"></i>
+    Skill Intelligence
+</h4>
+
+<span class="badge bg-success">
+    AI Powered
+</span>
+
+</div>
+
+<p style="color:#94a3b8; font-size:14px;">
+    Analyze your skills, discover gaps, and match market trends.
+</p>
+
+<input
+    id="skills"
+    class="form-control mt-3"
+    placeholder="python, sql, react"
+>
+<input
+    id="experienceLevel"
+    class="form-control mt-2"
+    placeholder="Experience Level (Fresher / 1 year)"
+>
+
+<input
+    id="education"
+    class="form-control mt-2"
+    placeholder="Education (BSc IT / BTech)"
+>
+
+<input
+    id="careerGoal"
+    class="form-control mt-2"
+    placeholder="Career Goal (AI Engineer / Analyst)"
+>
+
+<input
+    id="preferredRole"
+    class="form-control mt-2"
+    placeholder="Preferred Role"
+>
+
+<input
+    id="strengths"
+    class="form-control mt-2"
+    placeholder="Your Strengths (problem solving, communication)"
+> 
+<select id="domain" class="form-control mt-2">
+
+    <option value="tech">Software Development</option>
+
+    <option value="data">Data Science</option>
+
+    <option value="business">Business Analytics</option>
+
+    <option value="cyber">Cyber Security</option>
+
+    <option value="ai">Artificial Intelligence</option>
+
+    <option value="cloud">Cloud Computing</option>
+
+    <option value="web">Web Development</option>
+
+    <option value="mobile">App Development</option>
+
+    <option value="uiux">UI/UX Design</option>
+
+    <option value="devops">DevOps Engineering</option>
+
+    <option value="blockchain">Blockchain</option>
+
+    <option value="testing">Software Testing</option>
+
+    <option value="network">Networking</option>
+
+    <option value="marketing">Digital Marketing</option>
+
+    <option value="finance">Finance & FinTech</option>
+
+</select>
+<button
+    class="btn btn-success mt-3 w-100"
+    onclick="getSkills()"
+>
+    Analyze My Skills
+</button>
+
+<div id="skillResults" class="mt-4"></div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+
+async function getJobs() {
+
+    try {
+
+        const interests =
+            document
+            .getElementById("interests")
+            .value
+            .split(",")
+            .map(s => s.trim().toLowerCase())
+            .filter(s => s !== "");
+
+        const location =
+            document.getElementById("location").value;
+
+        const experience =
+            document.getElementById("experience").value;
+
+        const salary =
+            document.getElementById("salary").value;
+
+        const resultBox =
+            document.getElementById("jobResults");
+
+        if(interests.length === 0){
+
+            resultBox.innerHTML = `
+                <div class="job-card">
+                    ⚠️ Enter skills first
+                </div>
+            `;
+
+            return;
+        }
+
+        resultBox.innerHTML = `
+            <div class="skill-card fade-in">
+                🔍 AI finding best opportunities...
+            </div>
+        `;
+
+        const jobs = [
+
+            {
+                title:"Frontend Developer",
+                company:"TCS",
+                location:"Mumbai",
+                type:"Hybrid",
+                salary:"5-7 LPA",
+                skills:["react","javascript","css"],
+                icon:"💻"
+            },
+
+            {
+                title:"Data Analyst",
+                company:"Infosys",
+                location:"Pune",
+                type:"Remote",
+                salary:"6-9 LPA",
+                skills:["sql","python","excel"],
+                icon:"📊"
+            },
+
+            {
+                title:"AI Engineer",
+                company:"Wipro",
+                location:"Bangalore",
+                type:"Full Time",
+                salary:"8-14 LPA",
+                skills:["python","machine learning","ai"],
+                icon:"🤖"
+            },
+
+            {
+                title:"Cloud Engineer",
+                company:"Accenture",
+                location:"Hyderabad",
+                type:"Hybrid",
+                salary:"10-16 LPA",
+                skills:["cloud","aws","devops"],
+                icon:"☁️"
+            },
+
+            {
+                title:"Cyber Security Analyst",
+                company:"Tech Mahindra",
+                location:"Noida",
+                type:"Remote",
+                salary:"7-12 LPA",
+                skills:["cybersecurity","network"],
+                icon:"🔐"
+            },
+
+            {
+                title:"Backend Developer",
+                company:"Zoho",
+                location:"Chennai",
+                type:"Full Time",
+                salary:"6-10 LPA",
+                skills:["nodejs","mongodb","api"],
+                icon:"⚙️"
+            },
+
+            {
+                title:"Software Engineer",
+                company:"HCL",
+                location:"Bangalore",
+                type:"Hybrid",
+                salary:"5-8 LPA",
+                skills:["java","sql","cloud"],
+                icon:"🖥️"
+            }
+
+        ];
+
+        const matchedJobs = jobs.map(job => {
+
+            const matchedSkills =
+                job.skills.filter(skill =>
+                    interests.includes(skill)
+                );
+
+            return {
+
+                ...job,
+
+                match:
+                    Math.min(
+                        100,
+                        Math.floor(
+                            (matchedSkills.length / job.skills.length) * 100
+                        ) + Math.floor(Math.random()*15)
+                    )
+
+            };
+
+        });
+
+        matchedJobs.sort((a,b)=> b.match - a.match);
+
+        const finalJobs =
+            matchedJobs.slice(0,4);
+
+        let output = "";
+
+        finalJobs.forEach((job,index)=>{
+
+            output += `
+
+            <div class="job-card fade-in">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                ">
+
+                    <div>
+
+                        <div style="
+                            font-size:20px;
+                            font-weight:bold;
+                        ">
+                            ${job.icon} ${job.title}
+                        </div>
+
+                        <div style="
+                            color:#cbd5e1;
+                            font-size:14px;
+                            margin-top:4px;
+                        ">
+                            ${job.company}
+                        </div>
+
+                    </div>
+
+                    <span class="match-badge">
+                        ${job.match}% Match
+                    </span>
+
+                </div>
+
+                <div class="mt-3">
+
+                    <div class="trend-item">
+                        <span>📍 Location</span>
+                        <span>${job.location}</span>
+                    </div>
+
+                    <div class="trend-item">
+                        <span>💼 Work Mode</span>
+                        <span>${job.type}</span>
+                    </div>
+
+                    <div class="trend-item">
+                        <span>💰 Salary</span>
+                        <span>${job.salary}</span>
+                    </div>
+
+                </div>
+
+                <div class="mt-3">
+
+                    ${
+                        job.skills.map(skill => `
+                            <span class="market-tag">
+                                ${skill}
+                            </span>
+                        `).join("")
+                    }
+
+                </div>
+
+                ${
+                    index === 0
+                    ? `
+                    <div class="top-pick">
+                        ⭐ Top Recommended For You
+                    </div>
+                    `
+                    : ""
+                }
+
+                <div class="trend-box mt-3">
+
+                    <h6>🧠 AI Insight</h6>
+
+                    <p style="
+                        color:#cbd5e1;
+                        margin-top:10px;
+                    ">
+
+                        ${
+                            job.match > 85
+                            ? "Your profile strongly matches this company's hiring requirements."
+                            : job.match > 70
+                            ? "You qualify for most requirements of this role."
+                            : "Upskilling can improve your chances for this role."
+                        }
+
+                    </p>
+
+                </div>
+
+                <a
+                    href="#"
+                    class="apply-btn"
+                >
+                    Apply Now →
+                </a>
+
+            </div>
+            `;
+        });
+
+        resultBox.innerHTML = output;
+
+    } catch(error){
+
+        console.log(error);
+
+        document.getElementById("jobResults").innerHTML = `
+            <div class="job-card">
+                ❌ ${error.message}
+            </div>
+        `;
+    }
+}
+
+async function getSkills() {
+
+    try {
+
+        const skills =
+            document
+            .getElementById("skills")
+            .value
+            .split(",")
+            .map(s => s.trim().toLowerCase())
+            .filter(s => s !== "");
+
+        const experienceLevel =
+            document.getElementById("experienceLevel").value;
+        const education =
+            document.getElementById("education").value;
+
+        const careerGoal =
+            document.getElementById("careerGoal").value;
+
+        const preferredRole =
+            document.getElementById("preferredRole").value;
+
+        const strengths =
+            document.getElementById("strengths").value
+                .split(",")
+                .map(s => s.trim().toLowerCase())
+                .filter(s => s !== "");
+
+        const domain =
+            document.getElementById("domain").value;
+
+        const out = document.getElementById("skillResults");
+
+        if (skills.length === 0) {
+
+            out.innerHTML = `
+                <div class="skill-card">
+                    ⚠️ Please enter at least one skill (comma separated)
+                </div>
+            `;
+
+            return;
+        }
+
+        out.innerHTML = `
+            <div class="skill-card fade-in">
+                🔍 Analyzing your skills... please wait
+            </div>
+        `;
+
+        // Simple domain-based recommended skills map
+        const domainMap = {
+            tech: ['javascript','react','nodejs','html','css'],
+            data: ['python','sql','pandas','numpy','sql'],
+            business: ['excel','sql','power bi','tableau'],
+            cyber: ['networking','linux','python','security','pen testing'],
+            ai: ['python','machine learning','deep learning','pytorch','tensorflow'],
+            cloud: ['aws','azure','gcp','docker','kubernetes'],
+            web: ['javascript','react','nodejs','css','html'],
+            mobile: ['flutter','react native','kotlin','swift'],
+            uiux: ['figma','adobe xd','usability','prototyping'],
+            devops: ['docker','kubernetes','ci/cd','aws'],
+            blockchain: ['solidity','ethereum','web3','smart contracts'],
+            testing: ['selenium','jest','testing','cypress'],
+            network: ['networking','ccna','routing','switching'],
+            marketing: ['seo','content','analytics','google analytics'],
+            finance: ['excel','finance','accounting','sql']
+        };
+
+        const recommended = domainMap[domain] || [];
+
+        // compute gaps
+        const missing = recommended.filter(rs => !skills.includes(rs)).slice(0,8);
+
+        // Basic scoring (balanced between skills coverage and strengths)
+        let score = Math.min(100, Math.floor((skills.length / (recommended.length || 1)) * 70) + Math.floor(strengths.length * 6));
+
+        // trending skills (mocked percentages)
+        const trending = (recommended.slice(0,5)).map((s,i)=>({skill:s,change:Math.floor(Math.random()*30)+10*(i%2?1:0)}));
+
+        // career roles mapping
+        const rolesMap = {
+            tech: ['Frontend Developer','Backend Developer','Fullstack Engineer','Software Engineer'],
+            data: ['Data Analyst','Data Scientist','ML Engineer','Business Analyst'],
+            business: ['Business Analyst','Product Analyst','Strategy Analyst'],
+            cyber: ['Security Analyst','Penetration Tester','Security Engineer'],
+            ai: ['ML Engineer','AI Researcher','Data Scientist'],
+            cloud: ['Cloud Engineer','DevOps Engineer','Site Reliability Engineer'],
+            web: ['Frontend Developer','Web Developer','UI Engineer'],
+            mobile: ['Mobile Developer','Flutter Developer','iOS Developer'],
+            uiux: ['UI Designer','UX Researcher','Product Designer'],
+            devops: ['DevOps Engineer','Release Engineer','SRE'],
+            blockchain: ['Blockchain Developer','Smart Contract Engineer'],
+            testing: ['QA Engineer','Automation Engineer'],
+            network: ['Network Engineer','Systems Engineer'],
+            marketing: ['Digital Marketer','SEO Specialist'],
+            finance: ['Financial Analyst','FinTech Analyst']
+        };
+
+        const candidateRoles = rolesMap[domain] || ['General Software Role'];
+
+        // determine match status for roles (mock: if user has >=1 recommended skill)
+        const roleHtml = candidateRoles.map(r=>{
+            const hasMatch = recommended.some(rs=> skills.includes(rs));
+            return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><div>${r}</div><div style=\"font-weight:700;color:${hasMatch? '#10b981':'#9ca3af'}\">${hasMatch? 'MATCH':'POTENTIAL'}</div></div>`;
+        }).join('');
+
+        // render chips (apply semantic classes for better styling)
+        const haveChips = skills.map(s=>`<span class="market-tag have-tag" style="margin-right:6px">${s}</span>`).join('');
+        const missingChips = missing.map(s=>`<span class="market-tag missing-tag" style="margin-right:6px">${s}</span>`).join('');
+
+        // Prepare circular progress ring values
+        const ringR = 36; // radius
+        const ringC = Math.PI * 2 * ringR;
+        const ringOffset = Math.round(ringC * (1 - (score/100)));
+
+        // Render results in screenshot-like layout
+        out.innerHTML = `
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);padding:18px;border-radius:12px;">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <h5 style="margin:0;color:var(--text-primary)">Skill Match Score</h5>
+                        <small style="color:var(--text-secondary)">Needs improvement • Market Alignment</small>
+                    </div>
+                        <div style="text-align:right;display:flex;align-items:center;gap:12px">
+                            <div style="width:96px;height:96px;position:relative;display:inline-block">
+                                <svg width="96" height="96" viewBox="0 0 96 96">
+                                    <defs>
+                                        <linearGradient id="gScore" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#00ffe1" />
+                                            <stop offset="100%" stop-color="#0088ff" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="48" cy="48" r="${ringR}" stroke="rgba(255,255,255,0.06)" stroke-width="8" fill="none" />
+                                    <circle cx="48" cy="48" r="${ringR}" stroke="url(#gScore)" stroke-width="8" stroke-linecap="round" fill="none"
+                                        style="transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:${ringC};stroke-dashoffset:${ringOffset};transition:stroke-dashoffset 900ms cubic-bezier(.2,.9,.2,1);" />
+                                    <text x="48" y="48" text-anchor="middle" font-size="20" dominant-baseline="middle" style="fill:var(--text-primary,#ffffff);font-weight:800;font-family:Segoe UI, Roboto, Arial, sans-serif">${score}%</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                <div style="display:flex;gap:18px;margin-top:18px;flex-wrap:wrap">
+                    <div style="flex:1;min-width:260px">
+                        <h6 style="color:var(--text-primary);margin-bottom:8px">Profile Summary</h6>
+                        <div style="color:var(--text-secondary);font-size:14px">
+                            <div><strong>Experience:</strong> ${experienceLevel || 'Not specified'}</div>
+                            <div><strong>Education:</strong> ${education || 'Not specified'}</div>
+                            <div><strong>Career Goal:</strong> ${careerGoal || 'Not specified'}</div>
+                            <div><strong>Preferred Role:</strong> ${preferredRole || 'Not specified'}</div>
+                            <div><strong>Strengths:</strong> ${strengths.join(', ') || '—'}</div>
+                        </div>
+
+                        <div style="margin-top:12px">
+                            <div style="color:var(--text-primary);margin-bottom:6px">Skills You Have</div>
+                            <div class="stagger-list">${haveChips || '<span style="color:#9ca3af">None listed</span>'}</div>
+                        </div>
+
+                        <div style="margin-top:12px">
+                            <div style="color:var(--text-primary);margin-bottom:6px">Missing Skills</div>
+                            <div class="stagger-list">${missingChips || '<span style="color:#9ca3af">None — good coverage</span>'}</div>
+                        </div>
+                    </div>
+
+                    <div style="width:320px">
+                        <h6 style="color:var(--text-primary);margin-bottom:8px">Trending Skills</h6>
+                        <div style="color:var(--text-secondary);font-size:14px">
+                            ${trending.map(t=>`<div style=\"display:flex;justify-content:space-between;padding:6px 0\"><div>${t.skill}</div><div style=\"color:#10b981\">+${t.change}%</div></div>`).join('')}
+                        </div>
+
+                        <hr style="border-color:rgba(255,255,255,0.06);margin:12px 0">
+
+                        <h6 style="color:var(--text-primary);margin-bottom:8px">Career Roles You Match</h6>
+                        <div style="color:var(--text-secondary);font-size:14px">${roleHtml}</div>
+
+                        <div class="ai-insight" style="margin-top:12px">
+                            <strong style="color:var(--text-primary)">AI Insight</strong>
+                            <p style="margin-top:8px">Focus on learning high-demand technologies listed above to improve job opportunities. Build 2-3 projects showcasing missing skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+    } catch (error) {
+
+        console.log(error);
+
+        document.getElementById("skillResults").innerHTML = `
+            <div class="skill-card">
+                ❌ ${error.message}
+            </div>
+        `;
+    }
+
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

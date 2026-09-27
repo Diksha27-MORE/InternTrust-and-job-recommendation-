@@ -1,0 +1,1654 @@
+/* =========================================================
+   INTERNTRUST — ANALYZE PAGE
+   Full-width dashboard layout
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  --an-bg: #f6f7fb;
+  --an-surface: #ffffff;
+  --an-surface-soft: #f9faff;
+  --an-border: #e5e7ef;
+  --an-border-strong: #d9deea;
+  --an-ink: #10152b;
+  --an-ink-soft: #475467;
+  --an-muted: #667085;
+  --an-light: #98a2b3;
+  --an-primary: #2563eb;
+  --an-primary-dark: #1d4ed8;
+  --an-primary-soft: #eef4ff;
+  --an-success: #12b76a;
+  --an-success-soft: #ecfdf3;
+  --an-warning: #f79009;
+  --an-warning-soft: #fffaeb;
+  --an-danger: #f04438;
+
+  --an-radius-sm: 10px;
+  --an-radius-md: 14px;
+  --an-radius-lg: 20px;
+  --an-radius-xl: 24px;
+
+  --an-shadow-sm:
+    0 1px 2px rgba(16, 24, 40, 0.04);
+
+  --an-shadow-md:
+    0 8px 24px rgba(16, 24, 40, 0.06),
+    0 2px 6px rgba(16, 24, 40, 0.03);
+
+  --an-shadow-lg:
+    0 18px 45px rgba(16, 24, 40, 0.08),
+    0 4px 12px rgba(16, 24, 40, 0.04);
+
+  --an-sidebar-width: 232px;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.analyze-page {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--an-bg);
+  color: var(--an-ink);
+
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.analyze-page *,
+.analyze-page *::before,
+.analyze-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.analyze-main {
+  width: calc(100% - var(--an-sidebar-width));
+  min-height: 100vh;
+  margin-left: var(--an-sidebar-width);
+
+  padding:
+    42px
+    42px
+    70px;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.analyze-header {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.analyze-header h1 {
+  margin: 8px 0 7px;
+
+  color: var(--an-ink);
+
+  font-size: 34px;
+  line-height: 1.15;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+
+.analyze-header p {
+  margin: 0;
+
+  color: var(--an-muted);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   SMALL BLUE SECTION LABEL
+   ========================================================= */
+
+.dashboard-label {
+  display: inline-block;
+
+  color: var(--an-primary);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MAIN ANALYZE CARD
+   ========================================================= */
+
+.analyze-box {
+  position: relative;
+
+  width: 100%;
+  max-width: none;
+
+  padding:
+    46px
+    48px
+    44px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #ffffff 60%,
+      #fbfcff 100%
+    );
+
+  border:
+    1px solid var(--an-border);
+
+  border-radius: var(--an-radius-xl);
+
+  text-align: center;
+
+  box-shadow: var(--an-shadow-lg);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.analyze-box::before {
+  content: '';
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  top: -150px;
+  right: -80px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.10) 0%,
+      rgba(37, 99, 235, 0.04) 38%,
+      transparent 72%
+    );
+
+  pointer-events: none;
+}
+
+.analyze-box:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(37, 99, 235, 0.18);
+
+  box-shadow:
+    0 22px 50px rgba(16, 24, 40, 0.10),
+    0 4px 12px rgba(37, 99, 235, 0.04);
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.analyze-icon {
+  position: relative;
+  z-index: 2;
+
+  width: 62px;
+  height: 62px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(37, 99, 235, 0.12);
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eef4ff,
+      #e8efff
+    );
+
+  color: var(--an-primary);
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.10);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.analyze-box:hover .analyze-icon {
+  transform:
+    translateY(-3px)
+    scale(1.03);
+
+  box-shadow:
+    0 12px 26px rgba(37, 99, 235, 0.15);
+}
+
+
+/* =========================================================
+   STEP LABEL
+   ========================================================= */
+
+.analyze-step {
+  position: relative;
+  z-index: 2;
+
+  color: var(--an-primary);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.analyze-box h2 {
+  position: relative;
+  z-index: 2;
+
+  margin: 10px 0 9px;
+
+  color: var(--an-ink);
+
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 750;
+
+  letter-spacing: -0.03em;
+}
+
+.analyze-box > p {
+  position: relative;
+  z-index: 2;
+
+  width: min(100%, 600px);
+
+  margin:
+    0
+    auto
+    30px;
+
+  color: var(--an-muted);
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   INPUT AREA
+   ========================================================= */
+
+.analyze-input-area {
+  position: relative;
+  z-index: 2;
+
+  width: min(100%, 760px);
+
+  margin: 0 auto;
+
+  text-align: left;
+}
+
+.analyze-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+
+  text-align: left;
+}
+
+.analyze-form-grid label {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  color: var(--an-muted);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.analyze-form-grid input,
+.analyze-form-grid textarea,
+.analyze-form-grid select {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  border:
+    1px solid var(--an-border);
+
+  border-radius: var(--an-radius-sm);
+
+  background:
+    var(--an-surface);
+
+  color: var(--an-ink);
+
+  font: inherit;
+
+  font-size: 14px;
+
+  letter-spacing: normal;
+
+  resize: vertical;
+}
+
+.analyze-form-grid input:focus,
+.analyze-form-grid textarea:focus,
+.analyze-form-grid select:focus {
+  outline:
+    2px solid rgba(37, 99, 235, 0.18);
+
+  border-color:
+    var(--an-primary);
+}
+
+.analyze-form-wide {
+  grid-column: 1 / -1;
+}
+
+.analyze-input-area > .analyze-button {
+  margin-top: 18px;
+}
+
+.analyze-input-area label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--an-ink-soft);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   INPUT WRAPPER
+   ========================================================= */
+
+.analyze-input-wrapper {
+  width: 100%;
+  min-height: 62px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 6px;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid var(--an-border-strong);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 2px 8px rgba(16, 24, 40, 0.03);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.analyze-input-wrapper:hover {
+  border-color:
+    #cbd3e3;
+}
+
+.analyze-input-wrapper:focus-within {
+  border-color:
+    var(--an-primary);
+
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.10),
+    0 8px 20px rgba(37, 99, 235, 0.06);
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.analyze-input-wrapper input {
+  flex: 1;
+
+  width: 100%;
+  min-width: 0;
+
+  height: 48px;
+
+  padding:
+    0
+    15px;
+
+  border: none;
+  outline: none;
+
+  background:
+    transparent;
+
+  color: var(--an-ink);
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.analyze-input-wrapper input::placeholder {
+  color: var(--an-light);
+}
+
+
+/* =========================================================
+   ANALYZE BUTTON
+   ========================================================= */
+
+.analyze-button {
+  min-height: 48px;
+
+  padding:
+    0
+    23px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2f6df6,
+      #2563eb
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px rgba(37, 99, 235, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.analyze-button:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #3b78f7,
+      #1d4ed8
+    );
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 10px 22px rgba(37, 99, 235, 0.28);
+}
+
+.analyze-button:active {
+  transform:
+    translateY(0);
+}
+
+.analyze-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.analyze-error {
+  margin:
+    12px
+    0
+    0;
+
+  color:
+    var(--an-danger);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   INFO CHECKS
+   ========================================================= */
+
+.analyze-info {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 24px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 32px;
+
+  color: var(--an-muted);
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.analyze-info div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.analyze-info svg {
+  color:
+    var(--an-success);
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   ANALYSIS RESULT
+   ========================================================= */
+
+.analysis-result {
+  position: relative;
+  z-index: 2;
+
+  margin:
+    28px
+    auto
+    0;
+
+  padding:
+    22px
+    24px;
+
+  width:
+    min(100%, 760px);
+
+  border:
+    1px solid var(--an-border);
+
+  border-radius:
+    var(--an-radius-md);
+
+  background:
+    var(--an-surface-soft);
+
+  text-align: left;
+}
+
+.analysis-result-label {
+  color:
+    var(--an-primary);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+.analysis-result h3 {
+  margin:
+    8px
+    0
+    10px;
+
+  color:
+    var(--an-ink);
+
+  font-size: 24px;
+}
+
+.analysis-result p {
+  margin:
+    5px
+    0
+    0;
+
+  color:
+    var(--an-muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   RISK RESULT
+   ========================================================= */
+
+.risk-result {
+  padding:
+    26px
+    28px
+    28px;
+}
+
+.risk-result-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 32px;
+
+  margin-top: 14px;
+
+  flex-wrap: wrap;
+}
+
+.risk-ring-wrap {
+  position: relative;
+
+  flex-shrink: 0;
+
+  width: 148px;
+  height: 148px;
+}
+
+.risk-ring {
+  width: 100%;
+  height: 100%;
+
+  transform:
+    rotate(0deg);
+}
+
+.risk-ring-track {
+  stroke:
+    var(--an-border-strong);
+}
+
+.risk-ring-progress {
+  transition:
+    stroke-dashoffset 0.6s ease,
+    stroke 0.3s ease;
+}
+
+.risk-ring-center {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  line-height: 1;
+}
+
+.risk-ring-score {
+  font-size: 34px;
+
+  font-weight: 800;
+
+  color:
+    var(--an-ink);
+
+  letter-spacing: -0.02em;
+}
+
+.risk-ring-outof {
+  margin-top: 4px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color:
+    var(--an-muted);
+}
+
+.risk-summary {
+  flex:
+    1 1 280px;
+
+  min-width: 240px;
+}
+
+.risk-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding:
+    5px
+    12px;
+
+  border:
+    1.5px solid;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.risk-summary h3 {
+  margin:
+    12px
+    0
+    6px;
+
+  color:
+    var(--an-ink);
+
+  font-size: 21px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  letter-spacing: -0.02em;
+}
+
+.risk-confidence {
+  margin:
+    0
+    0
+    12px;
+
+  color:
+    var(--an-muted);
+
+  font-size: 13.5px;
+}
+
+.risk-confidence strong {
+  color:
+    var(--an-ink);
+}
+
+.risk-recommendation {
+  margin: 0;
+
+  padding:
+    10px
+    14px;
+
+  border-left:
+    3px solid;
+
+  background:
+    var(--an-surface);
+
+  border-radius:
+    0
+    var(--an-radius-sm)
+    var(--an-radius-sm)
+    0;
+
+  color:
+    var(--an-ink-soft);
+
+  font-size: 13.5px;
+
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+.risk-reasons {
+  margin-top: 22px;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid var(--an-border);
+}
+
+.risk-reasons-label {
+  color:
+    var(--an-primary);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+.risk-reasons ul {
+  margin:
+    10px
+    0
+    0;
+
+  padding: 0;
+
+  list-style: none;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.risk-reasons li {
+  position: relative;
+
+  padding-left: 20px;
+
+  color:
+    var(--an-ink-soft);
+
+  font-size: 13.5px;
+
+  line-height: 1.5;
+}
+
+.risk-reasons li::before {
+  content: '⚠';
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  color:
+    var(--an-warning);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   INTERNTRUST AI CHATBOT
+   ========================================================= */
+
+.interntrust-chatbot {
+  position: relative;
+  z-index: 2;
+
+  width:
+    min(100%, 760px);
+
+  margin:
+    22px
+    auto
+    0;
+
+  background:
+    var(--an-surface);
+
+  border:
+    1px solid var(--an-border);
+
+  border-radius:
+    var(--an-radius-lg);
+
+  box-shadow:
+    var(--an-shadow-md);
+
+  overflow: hidden;
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   CHATBOT HEADER
+   ========================================================= */
+
+.chatbot-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    18px
+    20px;
+
+  border-bottom:
+    1px solid var(--an-border);
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #f8faff
+    );
+}
+
+.chatbot-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid rgba(37, 99, 235, 0.12);
+
+  border-radius: 12px;
+
+  background:
+    var(--an-primary-soft);
+
+  color:
+    var(--an-primary);
+}
+
+.chatbot-header h3 {
+  margin: 0;
+
+  color:
+    var(--an-ink);
+
+  font-size: 15px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+}
+
+.chatbot-header p {
+  margin:
+    3px
+    0
+    0;
+
+  color:
+    var(--an-muted);
+
+  font-size: 11.5px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   CHAT MESSAGES
+   ========================================================= */
+
+.chatbot-messages {
+  min-height: 180px;
+  max-height: 360px;
+
+  padding:
+    18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  overflow-y: auto;
+
+  background:
+    var(--an-surface-soft);
+}
+
+.chat-message {
+  max-width: 82%;
+
+  padding:
+    10px
+    13px;
+
+  border-radius: 12px;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  word-break: break-word;
+
+  white-space: pre-line;
+}
+
+.chat-message.assistant {
+  align-self: flex-start;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid var(--an-border);
+
+  color:
+    var(--an-ink-soft);
+
+  border-bottom-left-radius: 4px;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+
+  background:
+    var(--an-primary);
+
+  color:
+    #ffffff;
+
+  border-bottom-right-radius: 4px;
+
+  box-shadow:
+    0 4px 10px rgba(37, 99, 235, 0.15);
+}
+
+
+/* =========================================================
+   CHAT INPUT
+   ========================================================= */
+
+.chatbot-input {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    12px;
+
+  border-top:
+    1px solid var(--an-border);
+
+  background:
+    #ffffff;
+}
+
+.chatbot-input input {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 44px;
+
+  padding:
+    0
+    13px;
+
+  border:
+    1px solid var(--an-border);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background:
+    var(--an-surface-soft);
+
+  color:
+    var(--an-ink);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chatbot-input input::placeholder {
+  color:
+    var(--an-light);
+}
+
+.chatbot-input input:focus {
+  border-color:
+    var(--an-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.chatbot-input button {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background:
+    var(--an-primary);
+
+  color:
+    #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.chatbot-input button:hover:not(:disabled) {
+  background:
+    var(--an-primary-dark);
+
+  transform:
+    translateY(-1px);
+}
+
+.chatbot-input button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+   ========================================================= */
+
+.analyze-how {
+  width: 100%;
+  max-width: none;
+
+  margin-top: 42px;
+}
+
+.analyze-how .section-top {
+  margin-bottom: 18px;
+}
+
+.analyze-how h2 {
+  margin:
+    7px
+    0
+    0;
+
+  color:
+    var(--an-ink);
+
+  font-size: 21px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+
+/* =========================================================
+   STEP CARDS
+   ========================================================= */
+
+.analyze-steps {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.analyze-step-card {
+  position: relative;
+
+  min-width: 0;
+
+  padding:
+    25px
+    24px;
+
+  background:
+    var(--an-surface);
+
+  border:
+    1px solid var(--an-border);
+
+  border-radius:
+    var(--an-radius-md);
+
+  box-shadow:
+    var(--an-shadow-sm);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.analyze-step-card::before {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #60a5fa
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 0.25s ease;
+}
+
+.analyze-step-card:hover {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(37, 99, 235, 0.18);
+
+  box-shadow:
+    0 14px 30px rgba(16, 24, 40, 0.08);
+}
+
+.analyze-step-card:hover::before {
+  opacity: 1;
+}
+
+.analyze-step-card > span {
+  display: inline-flex;
+
+  color:
+    var(--an-primary);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+}
+
+.analyze-step-card h3 {
+  margin:
+    13px
+    0
+    6px;
+
+  color:
+    var(--an-ink);
+
+  font-size: 16px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+
+  letter-spacing: -0.015em;
+}
+
+.analyze-step-card p {
+  margin: 0;
+
+  color:
+    var(--an-muted);
+
+  font-size: 12.5px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   LARGE SCREENS
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+  .analyze-main {
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+
+  .analyze-box {
+    padding:
+      52px
+      60px
+      48px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .analyze-main {
+    padding:
+      38px
+      30px
+      60px;
+  }
+
+  .analyze-box {
+    padding:
+      42px
+      35px;
+  }
+
+  .analyze-steps {
+    gap: 14px;
+  }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .analyze-main {
+    width: 100%;
+
+    margin-left: 0;
+
+    padding:
+      32px
+      24px
+      50px;
+  }
+
+  .analyze-box {
+    padding:
+      38px
+      28px;
+  }
+
+  .analyze-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .analyze-main {
+    padding:
+      28px
+      18px
+      45px;
+  }
+
+  .analyze-header {
+    margin-bottom: 24px;
+  }
+
+  .analyze-header h1 {
+    font-size: 28px;
+  }
+
+  .analyze-header p {
+    font-size: 13px;
+  }
+
+  .analyze-box {
+    padding:
+      32px
+      18px;
+  }
+
+  .analyze-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .analyze-box h2 {
+    font-size: 23px;
+  }
+
+  .analyze-box > p {
+    font-size: 13px;
+  }
+
+  .analyze-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analyze-form-wide {
+    grid-column: auto;
+  }
+
+  .analyze-input-wrapper {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 7px;
+  }
+
+  .analyze-input-wrapper input {
+    height: 48px;
+  }
+
+  .analyze-button {
+    width: 100%;
+  }
+
+  .analyze-info {
+    flex-direction: column;
+
+    gap: 11px;
+  }
+
+  .analyze-how {
+    margin-top: 34px;
+  }
+
+  .analyze-step-card {
+    padding: 22px;
+  }
+
+  /* Chatbot mobile */
+
+  .interntrust-chatbot {
+    border-radius:
+      var(--an-radius-md);
+  }
+
+  .chatbot-header {
+    padding:
+      15px;
+  }
+
+  .chatbot-messages {
+    min-height: 160px;
+    max-height: 300px;
+
+    padding:
+      14px;
+  }
+
+  .chat-message {
+    max-width: 90%;
+
+    font-size: 12.5px;
+  }
+
+  .chatbot-input {
+    padding:
+      9px;
+  }
+
+  .chatbot-input input {
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .analyze-main {
+    padding:
+      24px
+      14px
+      40px;
+  }
+
+  .analyze-box {
+    padding:
+      28px
+      14px;
+  }
+
+  .analyze-box h2 {
+    font-size: 21px;
+  }
+
+  .chatbot-header h3 {
+    font-size: 14px;
+  }
+
+  .chatbot-header p {
+    font-size: 10.5px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.analyze-button:focus-visible,
+.analyze-input-wrapper:focus-within,
+.chatbot-input input:focus-visible,
+.chatbot-input button:focus-visible {
+  outline: none;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .analyze-box,
+  .analyze-icon,
+  .analyze-button,
+  .analyze-step-card,
+  .analyze-input-wrapper,
+  .chatbot-input button,
+  .chatbot-input input {
+    transition: none;
+  }
+}

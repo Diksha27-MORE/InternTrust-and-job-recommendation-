@@ -1,0 +1,401 @@
+/* =========================================
+   INTERNTRUST — SCROLL-DRIVEN CINEMATIC INTRO
+   All motion is driven by --p (0 → 1) and its
+   per-phase sub-progress variables.
+========================================= */
+
+.it-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  background: #04060b;
+  color: #fff;
+  font-family: system-ui, -apple-system, "Segoe UI", Inter, sans-serif;
+}
+.it-intro::-webkit-scrollbar { width: 0; height: 0; }
+
+/* scroll runway: total story length */
+.it-runway { height: 620vh; }
+@media (max-width: 768px) { .it-runway { height: 520vh; } }
+
+/* pinned stage */
+.it-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(120% 80% at 50% 110%, rgba(29, 78, 216, calc(0.30 * var(--card))) 0%, transparent 60%),
+    #04060b;
+
+  transform: translate3d(0, calc(var(--exit) * -22vh), 0);
+  opacity: calc(1 - var(--exit) * 0.85);
+  will-change: transform, opacity;
+}
+
+.it-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(75% 60% at 50% 45%, transparent 40%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+/* =========================================
+   PHASE 1 — HEADLINE
+========================================= */
+
+.it-headline {
+  position: absolute;
+  z-index: 3;
+  margin: 0;
+  padding: 0 6vw;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+
+  font-size: clamp(2rem, 7vw, 5.6rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+
+  background: linear-gradient(180deg, #ffffff 0%, #b9c4d8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  filter: blur(calc(var(--headline) * 18px));
+  opacity: calc(1 - var(--headline) * 0.92);
+  transform: translate3d(0, calc(var(--headline) * -9vh), 0) scale(calc(1 - var(--headline) * 0.05));
+  will-change: filter, opacity, transform;
+}
+
+/* =========================================
+   PHASE 2 / 3 — BLUE CARD
+========================================= */
+
+.it-card {
+  position: absolute;
+  z-index: 4;
+
+  width: min(1180px, 92vw);
+  height: min(78vh, 820px);
+
+  border-radius: clamp(24px, 3vw, 44px);
+  border: 1px solid rgba(255, 255, 255, calc(0.06 + 0.10 * var(--card)));
+
+  background:
+    radial-gradient(120% 100% at 8% 0%, #2c4f9e 0%, transparent 55%),
+    linear-gradient(160deg, #16336e 0%, #0b1c40 55%, #050b1c 100%);
+
+  box-shadow:
+    0 60px 140px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(59, 130, 246, 0.08) inset;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  transform: translate3d(0, calc((1 - var(--card)) * 105vh), 0)
+             scale(calc(0.94 + var(--card) * 0.06 + var(--enter) * 0.045));
+  opacity: calc(0.15 + var(--card) * 0.85);
+  will-change: transform, opacity;
+}
+
+.it-card__glow {
+  position: absolute;
+  inset: -30% -10% auto -10%;
+  height: 70%;
+  background: radial-gradient(50% 100% at 50% 100%, rgba(59, 130, 246, 0.35), transparent 70%);
+  opacity: calc(0.4 + var(--enter) * 0.6);
+  pointer-events: none;
+}
+
+.it-card__label {
+  position: absolute;
+  top: clamp(16px, 2.4vw, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 800;
+  letter-spacing: 0.42em;
+  color: rgba(226, 236, 255, 0.55);
+  opacity: var(--card);
+}
+
+/* =========================================
+   PHASE 4 — PHONE (pure CSS device)
+========================================= */
+
+.it-phone {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  width: clamp(230px, 26vw, 330px);
+  height: clamp(470px, 54vw, 660px);
+
+  transform: translate3d(-50%, calc((1 - var(--phone)) * 88%), 0);
+  will-change: transform;
+}
+
+.it-phone__frame {
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  border-radius: clamp(30px, 3vw, 44px) clamp(30px, 3vw, 44px) 0 0;
+  padding: 10px 10px 0;
+
+  background: linear-gradient(150deg, #3a4150, #10131a 40%, #262b36);
+  box-shadow:
+    0 -20px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.it-phone__notch {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34%;
+  height: 22px;
+  border-radius: 999px;
+  background: #05070c;
+  z-index: 2;
+}
+
+.it-phone__screen {
+  position: relative;
+  height: 100%;
+  border-radius: clamp(22px, 2.4vw, 34px) clamp(22px, 2.4vw, 34px) 0 0;
+  background: linear-gradient(180deg, #0a0d14, #0d1220);
+  overflow: hidden;
+  padding: 54px clamp(12px, 1.4vw, 18px) 0;
+}
+
+.it-phone__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(190, 204, 228, 0.7);
+  text-transform: uppercase;
+}
+
+.it-phone__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+}
+
+/* =========================================
+   PHASE 5 — MESSAGES
+========================================= */
+
+.it-msgs {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.it-msg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(150deg, rgba(30, 41, 66, 0.95), rgba(16, 22, 38, 0.95));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+
+  font-size: clamp(11px, 1.05vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #e6ecf8;
+
+  opacity: var(--a);
+  transform: translate3d(calc((1 - var(--a)) * var(--dir, 18px)), calc((1 - var(--a)) * 14px), 0);
+  will-change: transform, opacity;
+}
+
+.it-msg--left { --dir: -18px; }
+.it-msg--right { --dir: 18px; }
+
+.it-msg--money { color: #7ee2a8; }
+.it-msg--amber { color: #fbbf24; }
+.it-msg--danger {
+  color: #fb7185;
+  border-color: rgba(251, 113, 133, 0.35);
+  background: linear-gradient(150deg, rgba(63, 22, 33, 0.95), rgba(24, 12, 18, 0.95));
+}
+
+.it-msg__tick { opacity: 0.45; font-size: 11px; }
+
+/* emphasized offer block */
+.it-offer {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(251, 146, 60, 0.28);
+  background: linear-gradient(150deg, rgba(51, 30, 12, 0.9), rgba(20, 14, 10, 0.9));
+
+  font-size: clamp(12px, 1.25vw, 15px);
+  letter-spacing: 0.04em;
+  color: #fdba74;
+  text-align: center;
+
+  opacity: var(--a);
+  transform: translate3d(0, calc((1 - var(--a)) * 16px), 0) scale(calc(0.96 + var(--a) * 0.04));
+}
+
+.it-offer__danger { color: #f87171; }
+
+/* scanning sweep */
+.it-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--a);
+  overflow: hidden;
+}
+.it-scan i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 34%;
+  top: calc(var(--a) * 78%);
+  background: linear-gradient(180deg, transparent, rgba(96, 165, 250, 0.22), transparent);
+  border-top: 1px solid rgba(147, 197, 253, 0.55);
+}
+
+/* =========================================
+   PHASE 6 — REVEAL (contained, intentional glitch)
+========================================= */
+
+.it-verdict {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  top: 38%;
+  transform: translate3d(-50%, calc((1 - var(--detect)) * 18px), 0);
+
+  font-size: clamp(1.35rem, 4.4vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: #fff5f5;
+  text-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+  opacity: calc(var(--detect) * (1 - var(--verify) * 0.9));
+  will-change: transform, opacity;
+}
+
+/* two offset chromatic copies, driven only by --glitch (peaks at reveal) */
+.it-verdict::before,
+.it-verdict::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: calc(var(--glitch) * 0.55);
+  pointer-events: none;
+}
+.it-verdict::before {
+  color: #ff4d5e;
+  transform: translate3d(calc(var(--glitch) * -5px), calc(var(--glitch) * 2px), 0);
+  clip-path: inset(0 0 55% 0);
+}
+.it-verdict::after {
+  color: #3b82f6;
+  transform: translate3d(calc(var(--glitch) * 5px), calc(var(--glitch) * -2px), 0);
+  clip-path: inset(52% 0 0 0);
+}
+
+.it-verify {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  top: 52%;
+  transform: translate3d(-50%, calc((1 - var(--verify)) * 22px), 0);
+
+  font-size: clamp(0.95rem, 2.3vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-align: center;
+  color: #cfe0ff;
+
+  opacity: var(--verify);
+}
+
+/* =========================================
+   SCROLL HINT
+========================================= */
+
+.it-hint {
+  position: absolute;
+  z-index: 7;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(226, 236, 255, 0.45);
+
+  opacity: calc(1 - var(--p) * 4);
+  pointer-events: none;
+}
+.it-hint i {
+  width: 1px;
+  height: 22px;
+  background: linear-gradient(180deg, rgba(226, 236, 255, 0.6), transparent);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .it-card { height: 74vh; border-radius: 22px; }
+  .it-phone { width: min(70vw, 260px); height: 60vh; }
+  .it-verdict { white-space: normal; width: 86vw; text-align: center; }
+  .it-offer { font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .it-stage, .it-card, .it-phone, .it-msg, .it-headline { transition: none; }
+  .it-verdict::before, .it-verdict::after { opacity: 0; }
+}
